@@ -1,0 +1,108 @@
+<head>
+<!--	<link rel="stylesheet" href="css/style.css"> -->
+	<style>
+		body {background-color: #222; height:2800px;}
+	
+		.container{
+			margin:10em auto 0;
+			text-align:center;
+		}
+		
+		#info{
+			margin-top:0;
+		}
+		
+		.colour{
+		width: 60px;
+		height: 800px;
+		position: relative;
+		display: inline-block;
+		}
+		
+		#textContainer{
+			width:50%;
+			background-color: rgba(255, 255, 255, .8);
+			margin:0 auto;
+			text-align: center;
+			padding:1em 3em;
+		}
+	
+	</style>
+	
+	
+	
+</head>
+<body>
+	<section id="first" class="container up">
+	
+		<h1 data-speed="8" data-type="background"><img id="iro" src="img/iro.png" alt="colours" /></h1>
+		
+		<div class="colour" style="background: url(img/color-01.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.1" data-type="spriteUp"></div>	
+		<div class="colour" style="background: url(img/color-02.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.3" data-type="spriteUp"></div>
+		<div class="colour" style="background: url(img/color-03.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.2" data-type="spriteUp"></div>	
+		<div class="colour" style="background: url(img/color-04.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.4" data-type="spriteUp"></div>
+		<div class="colour" style="background: url(img/color-05.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.7" data-type="spriteUp" ></div>	
+		<div class="colour" style="background: url(img/color-06.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.5" data-type="spriteUp"></div>
+		<div class="colour" style="background: url(img/color-07.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.6" data-type="spriteUp"></div>	
+		<div class="colour" style="background: url(img/color-08.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.2" data-type="spriteUp"></div>
+		<div class="colour" style="background: url(img/color-09.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.3" data-type="spriteUp"></div>
+	</section>
+	<section id="info" class="container down">
+		<div id="textContainer">
+			<h1>About Parallax Scrolling</h1>
+			<p>Parallax scrolling is a very popular effect in modern websites. Like all aspects of design, there are some very good and (much more) very bad examples of its implementation. Parallax should be a delightful little addition to a page, and should not overpower the page; many examples use large images and clunky javascript functions which may look impressive but do not provide a good user experience.</p>
+		</div>
+		<div class="colour" style="background: url(img/color-05.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.1" data-type="spriteDown"></div>	
+		<div class="colour" style="background: url(img/color-07.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.3" data-type="spriteDown"></div>
+		<div class="colour" style="background: url(img/color-06.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.2" data-type="spriteDown"></div>	
+		<div class="colour" style="background: url(img/color-03.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.4" data-type="spriteDown"></div>
+		<div class="colour" style="background: url(img/color-08.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.35" data-type="spriteDown" ></div>	
+		<div class="colour" style="background: url(img/color-09.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.5" data-type="spriteDown"></div>
+		<div class="colour" style="background: url(img/color-01.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.45" data-type="spriteDown"></div>	
+		<div class="colour" style="background: url(img/color-04.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.2" data-type="spriteDown"></div>
+		<div class="colour" style="background: url(img/color-02.jpg) no-repeat; background-size:100%;" alt="colour" data-speed="1.3" data-type="spriteDown"></div>
+	
+		
+	</section>
+
+
+
+
+	<script src="js/vendor/jquery-1.8.3.min.js"></script>	
+	<script>
+		$(document).ready(function(){
+			var elemDown = $('.down').offset().top;
+			var elemUp = $('.up').offset().top;
+		
+			$('div[data-type="spriteUp"]').each(function(){
+				var objSpriteUp = $(this); // assigning the object
+				$(window).scroll(function() {
+					var yPos = ($(window).scrollTop() / objSpriteUp.data('speed'));
+					// Put together our final background position
+					var coords = '50% '+ yPos + 'px';
+					// Move the background
+					objSpriteUp.css({ backgroundPosition: coords });
+
+				 });
+			});
+			$('div[data-type="spriteDown"]').each(function(){
+				var objSpriteDown = $(this); // assigning the object
+				$(window).scroll(function() {
+					if( $(window).scrollTop() > (objSpriteDown.offset().top - $(window).height())){
+						// var yPos = -($(window).scrollTop() / objSpriteDown.data('speed'))+450;
+
+						var yPos = (( $(window).scrollTop() / objSpriteDown.data('speed')))-1450;
+						console.log(yPos);
+						// Put together our final background position
+						var coords = '50% '+ yPos + 'px';
+						// Move the background
+						objSpriteDown.css({ backgroundPosition: coords });
+					}
+				});
+			});
+		});
+			
+	</script>
+	
+<!--	<script src="js/main.js"></script> -->
+</body>
